@@ -17,21 +17,23 @@ export default function Swap() {
   const uniswapUrl = `https://app.uniswap.org/swap?chain=base&outputCurrency=${CHONK_ADDRESS}`
 
   return (
-    <div style={{ padding: '40px 32px' }}>
+    <div style={{ padding: '48px 36px' }}>
 
       {/* Pool lock status banner */}
       {poolKnown && !poolUnlocked && (
         <div style={{
-          background: 'rgba(248,113,113,0.08)', border: '1px solid rgba(248,113,113,0.3)',
-          borderRadius: 12, padding: '14px 20px', marginBottom: 24,
-          display: 'flex', alignItems: 'center', gap: 12,
+          background: 'linear-gradient(135deg, rgba(248,113,113,0.1), rgba(248,113,113,0.05))',
+          border: '1px solid rgba(248,113,113,0.35)',
+          borderRadius: 14, padding: '16px 22px', marginBottom: 28,
+          display: 'flex', alignItems: 'center', gap: 14,
+          animation: 'slideIn 0.4s ease-out',
         }}>
-          <span style={{ fontSize: 18 }}>🔒</span>
+          <span style={{ fontSize: 20 }}>🔒</span>
           <div>
-            <div style={{ fontFamily: "'Syne', sans-serif", fontWeight: 700, fontSize: 14, color: '#f87171', marginBottom: 2 }}>
+            <div style={{ fontFamily: "'Syne', sans-serif", fontWeight: 700, fontSize: 15, color: '#f87171', marginBottom: 2 }}>
               Pool is currently locked
             </div>
-            <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 11, color: 'rgba(248,113,113,0.7)' }}>
+            <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 12, color: 'rgba(248,113,113,0.75)' }}>
               Trading is paused by the contract owner. Swaps will fail until the pool is unlocked.
             </div>
           </div>
@@ -40,45 +42,48 @@ export default function Swap() {
 
       {poolKnown && poolUnlocked && (
         <div style={{
-          background: 'rgba(74,222,128,0.06)', border: '1px solid rgba(74,222,128,0.2)',
-          borderRadius: 12, padding: '12px 20px', marginBottom: 24,
-          display: 'flex', alignItems: 'center', gap: 10,
+          background: 'linear-gradient(135deg, rgba(74,222,128,0.08), rgba(74,222,128,0.04))',
+          border: '1px solid rgba(74,222,128,0.25)',
+          borderRadius: 14, padding: '14px 22px', marginBottom: 28,
+          display: 'flex', alignItems: 'center', gap: 12,
+          animation: 'slideIn 0.4s ease-out',
         }}>
-          <span style={{ fontSize: 16 }}>🟢</span>
-          <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 11, color: '#4ade80' }}>
+          <span style={{ fontSize: 18 }}>🟢</span>
+          <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 12, color: '#4ade80', fontWeight: 600 }}>
             Pool is open · trading live on Uniswap V4
           </span>
         </div>
       )}
 
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 32 }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 40 }}>
         <div>
-          <h1 style={{ fontFamily: "'Syne', sans-serif", fontWeight: 800, fontSize: 42, color: '#fff', margin: '0 0 8px' }}>
+          <h1 style={{ fontFamily: "'Syne', sans-serif", fontWeight: 800, fontSize: 48, color: '#fff', margin: '0 0 12px', lineHeight: 1.1 }}>
             Swap <span style={{ color: '#ffc832' }}>CHONK</span>
           </h1>
-          <p style={{ fontFamily: "'Space Mono', monospace", fontSize: 12, color: 'rgba(255,255,255,0.4)' }}>
+          <p style={{ fontFamily: "'Space Mono', monospace", fontSize: 13, color: 'rgba(255,255,255,0.45)', letterSpacing: 0.5 }}>
             Uniswap V4 · Base Network
           </p>
         </div>
 
         {/* Tabs */}
-        <div style={{ display: 'flex', gap: 4, background: 'rgba(255,255,255,0.04)', padding: 4, borderRadius: 10 }}>
+        <div style={{ display: 'flex', gap: 6, background: 'rgba(255,255,255,0.05)', padding: 6, borderRadius: 12 }}>
           {['widget', 'info'].map(t => (
             <button key={t} onClick={() => setTab(t)} style={{
-              fontFamily: "'Space Mono', monospace", fontSize: 11, fontWeight: 700,
-              padding: '8px 16px', borderRadius: 8, border: 'none', cursor: 'pointer',
+              fontFamily: "'Space Mono', monospace", fontSize: 12, fontWeight: 700,
+              padding: '10px 18px', borderRadius: 8, border: 'none', cursor: 'pointer',
               background: tab === t ? '#ffc832' : 'transparent',
-              color: tab === t ? '#0a0806' : 'rgba(255,255,255,0.4)',
-              textTransform: 'capitalize', transition: 'all 0.2s',
+              color: tab === t ? '#0a0806' : 'rgba(255,255,255,0.5)',
+              textTransform: 'capitalize', transition: 'all 0.25s cubic-bezier(0.4,0,0.2,1)',
+              boxShadow: tab === t ? '0 4px 12px rgba(255,200,50,0.15)' : 'none',
             }}>{t === 'widget' ? 'Chart' : 'Token Info'}</button>
           ))}
         </div>
       </div>
 
       {tab === 'widget' && (
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 380px', gap: 24 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 380px', gap: 28 }}>
           {/* DEXTools chart */}
-          <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,200,50,0.1)', borderRadius: 16, overflow: 'hidden', minHeight: 480 }}>
+          <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,200,50,0.15)', borderRadius: 18, overflow: 'hidden', minHeight: 480, boxShadow: '0 8px 32px rgba(0,0,0,0.2)' }}>
             <iframe
               title="CHONK9K Chart"
               src={dextoolsUrl}
@@ -88,8 +93,8 @@ export default function Swap() {
           </div>
 
           {/* Uniswap swap widget */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-            <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,200,50,0.1)', borderRadius: 16, overflow: 'hidden', flex: 1 }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
+            <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,200,50,0.15)', borderRadius: 18, overflow: 'hidden', flex: 1, boxShadow: '0 8px 32px rgba(0,0,0,0.2)' }}>
               <iframe
                 title="Uniswap Swap"
                 src={`https://app.uniswap.org/#/swap?chain=base&outputCurrency=${CHONK_ADDRESS}&theme=dark`}
@@ -124,10 +129,18 @@ export default function Swap() {
       )}
 
       {tab === 'info' && (
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24 }}>
           {/* Token details */}
-          <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,200,50,0.12)', borderRadius: 16, padding: 28 }}>
-            <div style={{ fontFamily: "'Syne', sans-serif", fontWeight: 700, fontSize: 20, color: '#fff', marginBottom: 20 }}>Token Details</div>
+          <div style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,200,50,0.15)', borderRadius: 18, padding: 32, transition: 'all 0.3s cubic-bezier(0.4,0,0.2,1)' }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.background = 'rgba(255,255,255,0.06)';
+            e.currentTarget.style.boxShadow = '0 8px 24px rgba(255,200,50,0.08)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.background = 'rgba(255,255,255,0.04)';
+            e.currentTarget.style.boxShadow = 'none';
+          }}>
+            <div style={{ fontFamily: "'Syne', sans-serif", fontWeight: 700, fontSize: 22, color: '#fff', marginBottom: 24 }}>Token Details</div>
             {[
               ['Name', 'chonkpump'],
               ['Symbol', 'CHONK9K'],
@@ -146,8 +159,16 @@ export default function Swap() {
           </div>
 
           {/* How to buy */}
-          <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,200,50,0.12)', borderRadius: 16, padding: 28 }}>
-            <div style={{ fontFamily: "'Syne', sans-serif", fontWeight: 700, fontSize: 20, color: '#fff', marginBottom: 20 }}>How to Buy</div>
+          <div style={{ background: 'rgba(255,200,50,0.06)', border: '1px solid rgba(255,200,50,0.2)', borderRadius: 18, padding: 32, transition: 'all 0.3s cubic-bezier(0.4,0,0.2,1)' }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.background = 'rgba(255,200,50,0.08)';
+            e.currentTarget.style.boxShadow = '0 8px 28px rgba(255,200,50,0.12)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.background = 'rgba(255,200,50,0.06)';
+            e.currentTarget.style.boxShadow = 'none';
+          }}>
+            <div style={{ fontFamily: "'Syne', sans-serif", fontWeight: 700, fontSize: 22, color: '#fff', marginBottom: 24 }}>How to Buy</div>
             {[
               ['1', 'Install MetaMask or Coinbase Wallet'],
               ['2', 'Add Base Network (Chain ID: 8453)'],

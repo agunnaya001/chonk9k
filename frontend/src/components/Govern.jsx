@@ -49,13 +49,13 @@ export default function Govern() {
   }
 
   return (
-    <div style={{ padding: '40px 32px' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 40 }}>
+    <div style={{ padding: '48px 36px' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 48 }}>
         <div>
-          <h1 style={{ fontFamily: "'Syne', sans-serif", fontWeight: 800, fontSize: 42, color: '#fff', margin: '0 0 8px' }}>
+          <h1 style={{ fontFamily: "'Syne', sans-serif", fontWeight: 800, fontSize: 48, color: '#fff', margin: '0 0 12px', lineHeight: 1.1 }}>
             Govern <span style={{ color: '#ffc832' }}>CHONK</span>
           </h1>
-          <p style={{ fontFamily: "'Space Mono', monospace", fontSize: 12, color: 'rgba(255,255,255,0.4)' }}>
+          <p style={{ fontFamily: "'Space Mono', monospace", fontSize: 13, color: 'rgba(255,255,255,0.45)', letterSpacing: 0.5 }}>
             ERC-20Votes · on-chain · your stake = your voice
           </p>
         </div>
@@ -151,15 +151,15 @@ export default function Govern() {
             </div>
 
             {/* Vote bar */}
-            <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginTop: 8 }}>
-              <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, color: '#4ade80', width: 32 }}>{p.forPct}%</span>
-              <div style={{ flex: 1, height: 6, borderRadius: 999, background: 'rgba(255,255,255,0.06)', overflow: 'hidden' }}>
-                <div style={{ height: '100%', width: `${p.forPct}%`, background: 'linear-gradient(90deg, #4ade80, #22c55e)', borderRadius: 999, transition: 'width 0.5s' }} />
+            <div style={{ display: 'flex', gap: 10, alignItems: 'center', marginTop: 12 }}>
+              <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 11, color: '#4ade80', width: 40, fontWeight: 700 }}>{p.forPct}%</span>
+              <div style={{ flex: 1, height: 8, borderRadius: 999, background: 'rgba(74,222,128,0.12)', overflow: 'hidden', boxShadow: 'inset 0 1px 2px rgba(0,0,0,0.2)' }}>
+                <div style={{ height: '100%', width: `${p.forPct}%`, background: 'linear-gradient(90deg, #4ade80, #22c55e)', borderRadius: 999, transition: 'width 0.6s cubic-bezier(0.34,1.56,0.64,1)', boxShadow: '0 0 8px rgba(74,222,128,0.5)' }} />
               </div>
-              <div style={{ flex: 1, height: 6, borderRadius: 999, background: 'rgba(255,255,255,0.06)', overflow: 'hidden' }}>
-                <div style={{ height: '100%', width: `${p.againstPct}%`, background: 'linear-gradient(90deg, #f87171, #ef4444)', borderRadius: 999, transition: 'width 0.5s' }} />
+              <div style={{ flex: 1, height: 8, borderRadius: 999, background: 'rgba(248,113,113,0.12)', overflow: 'hidden', boxShadow: 'inset 0 1px 2px rgba(0,0,0,0.2)' }}>
+                <div style={{ height: '100%', width: `${p.againstPct}%`, background: 'linear-gradient(90deg, #f87171, #ef4444)', borderRadius: 999, transition: 'width 0.6s cubic-bezier(0.34,1.56,0.64,1)', boxShadow: '0 0 8px rgba(248,113,113,0.5)' }} />
               </div>
-              <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, color: '#f87171', width: 32, textAlign: 'right' }}>{p.againstPct}%</span>
+              <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 11, color: '#f87171', width: 40, textAlign: 'right', fontWeight: 700 }}>{p.againstPct}%</span>
             </div>
           </div>
         ))}

@@ -5,12 +5,26 @@ import { CHONK_ADDRESS } from '../abis'
 
 const StatCard = ({ label, value, sub, accent }) => (
   <div style={{
-    background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,200,50,0.12)',
-    borderRadius: 16, padding: '24px 28px',
+    background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,200,50,0.15)',
+    borderRadius: 18, padding: '28px 32px',
+    transition: 'all 0.3s cubic-bezier(0.4,0,0.2,1)',
+    position: 'relative',
+    overflow: 'hidden',
+    cursor: 'default',
+  }}
+  onMouseEnter={(e) => {
+    e.currentTarget.style.background = 'rgba(255,255,255,0.06)';
+    e.currentTarget.style.borderColor = 'rgba(255,200,50,0.25)';
+    e.currentTarget.style.boxShadow = '0 8px 24px rgba(255,200,50,0.1)';
+  }}
+  onMouseLeave={(e) => {
+    e.currentTarget.style.background = 'rgba(255,255,255,0.04)';
+    e.currentTarget.style.borderColor = 'rgba(255,200,50,0.15)';
+    e.currentTarget.style.boxShadow = 'none';
   }}>
-    <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 11, color: 'rgba(255,255,255,0.4)', marginBottom: 8, textTransform: 'uppercase', letterSpacing: 1 }}>{label}</div>
-    <div style={{ fontFamily: "'Syne', sans-serif", fontWeight: 800, fontSize: 26, color: accent || '#fff', marginBottom: 4 }}>{value}</div>
-    {sub && <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 11, color: 'rgba(255,255,255,0.3)' }}>{sub}</div>}
+    <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 11, color: 'rgba(255,255,255,0.45)', marginBottom: 10, textTransform: 'uppercase', letterSpacing: 1.2, fontWeight: 600 }}>{label}</div>
+    <div style={{ fontFamily: "'Syne', sans-serif", fontWeight: 800, fontSize: 28, color: accent || '#fff', marginBottom: 6, lineHeight: 1 }}>{value}</div>
+    {sub && <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 12, color: 'rgba(255,255,255,0.35)' }}>{sub}</div>}
   </div>
 )
 
@@ -35,15 +49,15 @@ export default function Dashboard({ price }) {
   const daysToMint = secondsToMint !== null ? Math.floor(secondsToMint / 86400) : null
 
   return (
-    <div style={{ padding: '40px 32px' }}>
-      <div style={{ marginBottom: 40 }}>
-        <h1 style={{ fontFamily: "'Syne', sans-serif", fontWeight: 800, fontSize: 42, color: '#fff', margin: 0, lineHeight: 1 }}>
+    <div style={{ padding: '48px 36px' }}>
+      <div style={{ marginBottom: 48 }}>
+        <h1 style={{ fontFamily: "'Syne', sans-serif", fontWeight: 800, fontSize: 48, color: '#fff', margin: 0, lineHeight: 1.1 }}>
           Chonk <span style={{ color: '#ffc832' }}>Universe</span>
         </h1>
-        <p style={{ fontFamily: "'Space Mono', monospace", fontSize: 12, color: 'rgba(255,255,255,0.4)', marginTop: 10 }}>
-          Live · Base Network ·{' '}
+        <p style={{ fontFamily: "'Space Mono', monospace", fontSize: 13, color: 'rgba(255,255,255,0.45)', marginTop: 12, letterSpacing: 0.5 }}>
+          Live on Base Network ·{' '}
           <a href={`https://basescan.org/token/${CHONK_ADDRESS}`} target="_blank" rel="noopener noreferrer"
-            style={{ color: '#ffc832', textDecoration: 'none' }}>
+            style={{ color: '#ffc832', textDecoration: 'none', fontWeight: 600, transition: 'all 0.2s' }}>
             {CHONK_ADDRESS.slice(0, 6)}…{CHONK_ADDRESS.slice(-4)} ↗
           </a>
         </p>
@@ -57,21 +71,28 @@ export default function Dashboard({ price }) {
         <StatCard label="Total Supply" value={totalSupply ? fmt(totalSupply) : '100Q'} sub="CHONK9K" />
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>
         {/* Token gate */}
         <div style={{
-          background: tierUnlocked ? 'rgba(255,200,50,0.08)' : 'rgba(255,255,255,0.02)',
-          border: `1px solid ${tierUnlocked ? 'rgba(255,200,50,0.3)' : 'rgba(255,255,255,0.08)'}`,
-          borderRadius: 16, padding: 28,
+          background: tierUnlocked ? 'linear-gradient(135deg, rgba(255,200,50,0.12), rgba(255,200,50,0.06))' : 'rgba(255,255,255,0.03)',
+          border: `1px solid ${tierUnlocked ? 'rgba(255,200,50,0.35)' : 'rgba(255,255,255,0.12)'}`,
+          borderRadius: 18, padding: 32,
+          transition: 'all 0.3s cubic-bezier(0.4,0,0.2,1)',
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.boxShadow = tierUnlocked ? '0 8px 28px rgba(255,200,50,0.12)' : '0 8px 24px rgba(0,0,0,0.2)';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.boxShadow = 'none';
         }}>
-          <div style={{ fontFamily: "'Syne', sans-serif", fontWeight: 700, fontSize: 18, color: '#fff', marginBottom: 8 }}>
+          <div style={{ fontFamily: "'Syne', sans-serif", fontWeight: 700, fontSize: 20, color: '#fff', marginBottom: 12 }}>
             {!isConnected ? '🔒 Connect to Check Tier' : tierUnlocked ? '🔓 Chonk Tier Unlocked' : '🔒 Chonk Tier Locked'}
           </div>
-          <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 12, color: 'rgba(255,255,255,0.4)', marginBottom: 16 }}>
+          <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 13, color: 'rgba(255,255,255,0.45)', marginBottom: 18, lineHeight: 1.6 }}>
             Hold 1B+ CHONK9K for whale alerts, advanced analytics, and boosted governance weight.
           </div>
           {isConnected && (
-            <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 12, color: tierUnlocked ? '#ffc832' : 'rgba(255,255,255,0.3)' }}>
+            <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 13, color: tierUnlocked ? '#ffc832' : 'rgba(255,255,255,0.35)', fontWeight: 600 }}>
               {tierUnlocked
                 ? `✓ ${fmt(balance)} CHONK held`
                 : `Your balance: ${fmt(balance)} CHONK`}
@@ -81,10 +102,19 @@ export default function Dashboard({ price }) {
 
         {/* Contract stats */}
         <div style={{
-          background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.08)',
-          borderRadius: 16, padding: 28,
+          background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.12)',
+          borderRadius: 18, padding: 32,
+          transition: 'all 0.3s cubic-bezier(0.4,0,0.2,1)',
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.background = 'rgba(255,255,255,0.05)';
+          e.currentTarget.style.boxShadow = '0 8px 24px rgba(0,0,0,0.2)';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.background = 'rgba(255,255,255,0.03)';
+          e.currentTarget.style.boxShadow = 'none';
         }}>
-          <div style={{ fontFamily: "'Syne', sans-serif", fontWeight: 700, fontSize: 18, color: '#fff', marginBottom: 16 }}>Contract Stats</div>
+          <div style={{ fontFamily: "'Syne', sans-serif", fontWeight: 700, fontSize: 20, color: '#fff', marginBottom: 20 }}>Contract Stats</div>
           {[
             ['Symbol', 'CHONK9K'],
             ['Chain', 'Base (L2)'],
@@ -93,9 +123,9 @@ export default function Dashboard({ price }) {
             ['Next Mint', daysToMint !== null ? `${daysToMint}d` : '…'],
             ['Yearly Mint Rate', mintRate ? `${fmt(mintRate)} CHONK/yr` : '…'],
           ].map(([k, v]) => (
-            <div key={k} style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 9 }}>
-              <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 11, color: 'rgba(255,255,255,0.3)' }}>{k}</span>
-              <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 11, color: '#fff' }}>{v}</span>
+            <div key={k} style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 14, paddingBottom: 14, borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+              <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 12, color: 'rgba(255,255,255,0.4)' }}>{k}</span>
+              <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 12, color: '#fff', fontWeight: 600 }}>{v}</span>
             </div>
           ))}
         </div>

@@ -83,11 +83,11 @@ export default function Vesting() {
   })
 
   return (
-    <div style={{ padding: '40px 32px' }}>
-      <h1 style={{ fontFamily: "'Syne', sans-serif", fontWeight: 800, fontSize: 42, color: '#fff', margin: '0 0 8px' }}>
+    <div style={{ padding: '48px 36px' }}>
+      <h1 style={{ fontFamily: "'Syne', sans-serif", fontWeight: 800, fontSize: 48, color: '#fff', margin: '0 0 12px', lineHeight: 1.1 }}>
         Vesting <span style={{ color: '#ffc832' }}>Claim</span>
       </h1>
-      <p style={{ fontFamily: "'Space Mono', monospace", fontSize: 12, color: 'rgba(255,255,255,0.4)', marginBottom: 40 }}>
+      <p style={{ fontFamily: "'Space Mono', monospace", fontSize: 13, color: 'rgba(255,255,255,0.45)', marginBottom: 48, letterSpacing: 0.5 }}>
         Your CHONK9K allocation unlocks linearly · claim anytime
       </p>
 
@@ -128,8 +128,17 @@ export default function Vesting() {
 
             {/* Progress card */}
             <div style={{
-              background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,200,50,0.15)',
+              background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,200,50,0.18)',
               borderRadius: 20, padding: 32,
+              transition: 'all 0.3s cubic-bezier(0.4,0,0.2,1)',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'rgba(255,255,255,0.06)';
+              e.currentTarget.style.boxShadow = '0 8px 24px rgba(255,200,50,0.08)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'rgba(255,255,255,0.04)';
+              e.currentTarget.style.boxShadow = 'none';
             }}>
               <div style={{ fontFamily: "'Syne', sans-serif", fontWeight: 700, fontSize: 18, color: '#fff', marginBottom: 24 }}>
                 Vesting Progress
@@ -149,23 +158,24 @@ export default function Vesting() {
               </div>
 
               {/* Progress bar */}
-              <div style={{ marginBottom: 10 }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8 }}>
-                  <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 11, color: 'rgba(255,255,255,0.4)' }}>Unlocked</span>
-                  <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 11, color: '#ffc832' }}>{progressPct.toFixed(1)}%</span>
+              <div style={{ marginBottom: 14 }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 10 }}>
+                  <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 12, color: 'rgba(255,255,255,0.45)', fontWeight: 600 }}>Unlocked</span>
+                  <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 12, color: '#ffc832', fontWeight: 700 }}>{progressPct.toFixed(1)}%</span>
                 </div>
-                <div style={{ height: 8, borderRadius: 999, background: 'rgba(255,255,255,0.08)', overflow: 'hidden' }}>
+                <div style={{ height: 10, borderRadius: 999, background: 'rgba(255,255,255,0.08)', overflow: 'hidden', boxShadow: 'inset 0 1px 2px rgba(0,0,0,0.3)' }}>
                   <div style={{
                     height: '100%', width: `${progressPct}%`,
-                    background: 'linear-gradient(90deg, #ffc832, #ff6b00)',
-                    borderRadius: 999, transition: 'width 0.6s ease',
+                    background: 'linear-gradient(90deg, #ffc832 0%, #ff8800 100%)',
+                    borderRadius: 999, transition: 'width 0.7s cubic-bezier(0.34,1.56,0.64,1)',
+                    boxShadow: '0 0 12px rgba(255,200,50,0.4)',
                   }} />
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 6 }}>
-                  <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, color: 'rgba(255,255,255,0.25)' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 10 }}>
+                  <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 11, color: 'rgba(255,255,255,0.3)' }}>
                     {fmt(released)} claimed
                   </span>
-                  <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, color: 'rgba(255,255,255,0.25)' }}>
+                  <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 11, color: 'rgba(255,255,255,0.3)' }}>
                     {fmt(totalVested)} total
                   </span>
                 </div>
