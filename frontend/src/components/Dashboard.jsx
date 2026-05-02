@@ -52,7 +52,7 @@ export default function Dashboard({ price }) {
     <div style={{ padding: '48px 36px' }}>
       <div style={{ marginBottom: 48 }}>
         <h1 style={{ fontFamily: "'Syne', sans-serif", fontWeight: 800, fontSize: 48, color: '#fff', margin: 0, lineHeight: 1.1 }}>
-          Chonk <span style={{ color: '#ffc832' }}>Universe</span>
+          Chonkpump <span style={{ color: '#ffc832' }}>Universe</span>
         </h1>
         <p style={{ fontFamily: "'Space Mono', monospace", fontSize: 13, color: 'rgba(255,255,255,0.45)', marginTop: 12, letterSpacing: 0.5 }}>
           Live on Base Network ·{' '}

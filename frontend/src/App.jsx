@@ -8,7 +8,6 @@ import Dashboard from './components/Dashboard'
 import Vesting from './components/Vesting'
 import Govern from './components/Govern'
 import Swap from './components/Swap'
-import { Analytics } from './components/Analytics'
 import { ErrorBoundary } from './components/ErrorBoundary'
 import { ToastProvider } from './components/Toast'
 import { useChonkBalance, fmt } from './hooks/useChonk'
@@ -40,7 +39,7 @@ const Particles = () => {
 }
 
 // ── Nav ───────────────────────────────────────────────────────────────────────
-const TABS = ['Dashboard', 'Vesting', 'Govern', 'Swap', 'Analytics']
+const TABS = ['Dashboard', 'Vesting', 'Govern', 'Swap']
 
 function Nav({ active, setActive }) {
   const { data: balance } = useChonkBalance()
@@ -60,7 +59,7 @@ function Nav({ active, setActive }) {
           boxShadow: '0 4px 20px rgba(255,200,50,0.25)',
         }}>🐱</div>
         <span style={{ fontFamily: "'Syne', sans-serif", fontWeight: 800, fontSize: 20, color: '#ffc832', letterSpacing: '-0.5px' }}>
-          CHONK9K
+          CHONKPUMP
         </span>
       </div>
 
@@ -133,7 +132,6 @@ function AppInner() {
     Vesting: <Vesting />,
     Govern: <Govern />,
     Swap: <Swap />,
-    Analytics: <Analytics />,
   }
 
   return (
