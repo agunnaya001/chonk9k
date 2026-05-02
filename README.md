@@ -1,4 +1,4 @@
-# CHONK9K - Advanced DeFi Protocol on Base
+# CHONKPUMP (CHONK9K) - DeFi Protocol on Base
 
 <div align="center">
 
@@ -13,12 +13,11 @@
 
 ## Overview
 
-CHONK9K is a production-ready DeFi protocol built on Base featuring advanced tokenomics, staking mechanisms, on-chain governance, vesting schedules, and decentralized swaps. The protocol implements ERC-20 tokens with voting rights, configurable inflation, time-locked staking pools, and Uniswap V4 integration.
+CHONKPUMP (symbol: CHONK9K) is a production-ready DeFi protocol built on Base featuring advanced tokenomics, on-chain governance, vesting schedules, and decentralized swaps. The protocol implements ERC-20 tokens with voting rights, configurable inflation, and Uniswap V4 integration.
 
 **Key Features:**
 - ERC-20 token with voting rights (ERC-20Votes)
 - Yearly configurable inflation mechanism
-- Tiered staking pool with rewards
 - Linear vesting with claim-anytime mechanics
 - On-chain governance via voting delegation
 - Uniswap V4 integration for DEX swaps
@@ -32,12 +31,6 @@ CHONK9K is a production-ready DeFi protocol built on Base featuring advanced tok
 ### Smart Contracts (Foundry)
 
 Located in `/contracts/src/`:
-
-#### `Chonk9kStaking.sol`
-- Time-locked staking deposits
-- Tier-based rewards (Chonker, Whale, MegaChonk)
-- Pending rewards calculation with configurable APY
-- Withdrawals with optional lock penalties
 
 #### Token Features
 - ERC-20 standard compliance
@@ -56,7 +49,6 @@ Located in `/frontend/src/`:
 - **Vesting**: Claim vested tokens with progress tracking
 - **Govern**: On-chain governance voting interface
 - **Swap**: Uniswap V4 trading with DEXTools charts
-- **Analytics**: Holdings, APY, tier tracking, protocol metrics
 
 #### Utilities
 - **Formatting**: Number formatting, currency conversion, address truncation
@@ -66,7 +58,6 @@ Located in `/frontend/src/`:
 - `useChonkBalance()`: User token balance
 - `useVotes()`: Voting power
 - `useVestingData()`: Vesting progress
-- `useStakeInfo()`: Staking position and rewards
 - `useInflationData()`: Supply, mint rate, pool status
 
 #### Features
@@ -147,19 +138,6 @@ function yearlyMintRate() external view returns (uint256);
 function mint() external;
 ```
 
-### Staking
-
-```solidity
-// Actions
-function stake(uint256 amount, uint256 lockTime) external;
-function unstake() external;
-function harvestRewards() external returns (uint256);
-
-// Views
-function pendingRewards(address user) external view returns (uint256);
-function tierOf(address user) external view returns (uint8);
-```
-
 ---
 
 ## Configuration
@@ -171,7 +149,6 @@ Create `.env.local` in `/frontend`:
 ```bash
 VITE_RPC_URL=https://base-rpc.publicnode.com
 VITE_CHONK_ADDRESS=0x...
-VITE_STAKING_ADDRESS=0x...
 VITE_POOL_ADDRESS=0x...
 ```
 
@@ -216,7 +193,7 @@ cd contracts
 forge test
 
 # Specific test
-forge test --match testStaking
+forge test --match testVesting
 
 # Coverage
 forge coverage
@@ -253,7 +230,6 @@ forge coverage
 ## Roadmap
 
 - Governance snapshot voting
-- Yield farming with multiple pools
 - NFT tier badges
 - Governance treasury
 - Cross-chain bridging
@@ -271,7 +247,7 @@ MIT License - see [LICENSE](LICENSE) for details.
 ## Support
 
 - GitHub Issues: [Report a bug](../../issues)
-- Discord: [Join community](https://discord.gg/chonk9k)
+- Discord: [Join community](https://discord.gg/chonkpump)
 - Docs: [Read guides](./docs)
 
 ---
@@ -280,6 +256,6 @@ MIT License - see [LICENSE](LICENSE) for details.
 
 Built with Solidity, React, Viem, and Wagmi on Base Network
 
-[Website](https://chonk9k.io) • [Twitter](https://twitter.com/chonk9k) • [GitHub](https://github.com/chonk9k)
+[Website](https://chonk.blog) • [Twitter](https://twitter.com/chonkpump) • [GitHub](https://github.com/chonkpump)
 
 </div>
