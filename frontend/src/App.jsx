@@ -8,6 +8,9 @@ import Dashboard from './components/Dashboard'
 import Vesting from './components/Vesting'
 import Govern from './components/Govern'
 import Swap from './components/Swap'
+import { Analytics } from './components/Analytics'
+import { ErrorBoundary } from './components/ErrorBoundary'
+import { ToastProvider } from './components/Toast'
 import { useChonkBalance, fmt } from './hooks/useChonk'
 import { CHONK_ADDRESS, POOL_ADDRESS } from './abis'
 
@@ -37,7 +40,7 @@ const Particles = () => {
 }
 
 // ── Nav ───────────────────────────────────────────────────────────────────────
-const TABS = ['Dashboard', 'Vesting', 'Govern', 'Swap']
+const TABS = ['Dashboard', 'Vesting', 'Govern', 'Swap', 'Analytics']
 
 function Nav({ active, setActive }) {
   const { data: balance } = useChonkBalance()
@@ -130,6 +133,7 @@ function AppInner() {
     Vesting: <Vesting />,
     Govern: <Govern />,
     Swap: <Swap />,
+    Analytics: <Analytics />,
   }
 
   return (
@@ -164,10 +168,14 @@ function AppInner() {
 // ── Root ──────────────────────────────────────────────────────────────────────
 export default function App() {
   return (
-    <WagmiProvider config={config}>
-      <QueryClientProvider client={queryClient}>
-        <AppInner />
-      </QueryClientProvider>
-    </WagmiProvider>
+    <ErrorBoundary>
+      <ToastProvider>
+        <WagmiProvider config={config}>
+          <QueryClientProvider client={queryClient}>
+            <AppInner />
+          </QueryClientProvider>
+        </WagmiProvider>
+      </ToastProvider>
+    </ErrorBoundary>
   )
 }
